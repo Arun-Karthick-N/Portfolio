@@ -1,0 +1,500 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arun Karthick N - Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover {
+            color: #ffd700;
+        }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+        .nav-links.mobile {
+            position: fixed;
+            left: -100%;
+            top: 60px;
+            flex-direction: column;
+            background: rgba(102, 126, 234, 0.95);
+            width: 100%;
+            text-align: center;
+            transition: 0.3s;
+            padding: 2rem 0;
+        }
+        .nav-links.mobile.active {
+            left: 0;
+        }
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        #hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 10rem 2rem 5rem;
+            margin-top: 60px; /* Account for fixed header */
+        }
+        #hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        #hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .contact-info a:hover {
+            color: #ffd700;
+        }
+        .contact-info i {
+            font-size: 1.2rem;
+            margin-right: 0.5rem;
+        }
+        .btn {
+            display: inline-block;
+            background: #ffd700;
+            color: #333;
+            padding: 0.8rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            font-weight: 500;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+        .about-bio {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            font-size: 1.1rem;
+            color: #666;
+        }
+        .about-bio ul {
+            text-align: left;
+            margin-top: 1rem;
+        }
+        .about-bio ul li {
+            margin-bottom: 0.5rem;
+        }
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        .skill-category {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .skill-category h3 {
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+        .skill-list {
+            list-style: none;
+        }
+        .skill-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        .education-item, .project-item, .cert-item {
+            background: white;
+            margin-bottom: 2rem;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        .education-item:hover, .project-item:hover, .cert-item:hover {
+            transform: translateY(-5px);
+        }
+        .education-item h3, .project-item h3, .cert-item h3 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+        .education-item .date, .project-item .date, .cert-item .date {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+        .project-item ul {
+            margin-left: 1.5rem;
+        }
+        .project-item ul li {
+            margin-bottom: 0.5rem;
+        }
+        .project-github {
+            margin-top: 1rem;
+        }
+        .project-github a {
+            font-size: 0.9rem;
+        }
+        .internship {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        .internship h3 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+        .internship .date {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+        @media (max-width: 768px) {
+            .hamburger { display: flex; }
+            .nav-links { display: none; }
+            .nav-links.mobile { display: flex; }
+            #hero h1 { font-size: 2rem; }
+            .contact-info { flex-direction: column; gap: 1rem; }
+            .btn { width: 100%; margin: 0.5rem 0; display: block; max-width: 300px; margin-left: auto; margin-right: auto; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Arun Karthick N</div>
+            <ul class="nav-links">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#certificates">Certificates</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <section id="hero">
+        <h1>Arun Karthick N</h1>
+        <p>Electronics and Communication Engineer (BE '25) | IoT & ML Enthusiast</p>
+        <div class="contact-info">
+            <div><i class="fas fa-map-marker-alt"></i> Madurai, Tamil Nadu</div>
+            <div><a href="mailto:arunkarthickn27@gmail.com"><i class="fas fa-envelope"></i> arunkarthickn27@gmail.com</a></div>
+            <div><a href="tel:+917200401122"><i class="fas fa-phone"></i> +91 7200401122</a></div>
+        </div>
+        <a href="Arun_Karthick_N.pdf" download class="btn" style="background: #667eea; color: white; margin-top: 1rem;">Download Resume <i class="fas fa-download"></i></a>
+        <a href="#contact" class="btn">Get in Touch</a>
+        <a href="https://www.linkedin.com/in/arun-karthick-n/" class="btn" style="margin-left: 1rem; background: transparent; border: 2px solid white;" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i> LinkedIn</a>
+        <a href="https://github.com/Arun-Karthick-N" class="btn" style="background: transparent; border: 2px solid white;" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a>
+    </section>
+
+    <section id="about">
+        <h2>About Me</h2>
+        <div class="about-bio">
+            <p>Greetings! I'm Arun Karthick, a passionate Electronics and Communication Engineer with a deep interest in software engineering and development. Eager to apply my theoretical knowledge to real-world applications, I'm actively seeking opportunities to enhance my skills and contribute to cutting-edge software projects.</p>
+            <ul>
+                <li>Achieved a strong academic record with a CGPA of 8.41/10 in BE Electronics and Communication with Honours from K.L.N. College of Engineering.</li>
+                <li>Gained hands-on experience through a Project Internship at K.L.N Innovation & Research Park, where I developed a MicroPython-based Laser Transmitter & Receiver Signal Coordination System for agricultural land leveling, collaborating in a team of six to integrate IoT and sensor networks for enhanced efficiency.</li>
+                <li>Proficient in programming languages like C, C++, Python, Java, and SQL; experienced with tools such as VS Code, Android Studio, Git, and GitHub; and familiar with concepts including Object-Oriented Programming, Data Structures & Algorithms, and Agile-Scrum methodologies.</li>
+                <li>Developed innovative projects focusing on IoT and ML, such as SmartAgroBiz (an ML-powered farming and e-commerce solution using Flutter, Supabase, and Random Forest models for crop recommendations), IoT-Enabled Air Quality Monitoring System, and Smart Energy Management System, demonstrating skills in embedded systems, real-time data processing, and cloud-based alerts.</li>
+                <li>Possess strong soft skills including communication, team collaboration, time management, critical thinking, and attention to detail, complemented by certifications in programming fundamentals, Python, cybersecurity, Industry 4.0, and more.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="education">
+        <h2>Education</h2>
+        <div class="education-item">
+            <h3>K.L.N. College of Engineering</h3>
+            <div class="date">Oct 2021 – Apr 2025</div>
+            <p>BE Electronics and Communication with Honours – CGPA: 8.41/10</p>
+        </div>
+        <div class="education-item">
+            <h3>AKNU S.Sundar Matric Hr Sec School</h3>
+            <div class="date">Jun 2020 – May 2021</div>
+            <p>HSC in Computer Science – Percentage: 89.78</p>
+        </div>
+        <div class="education-item">
+            <h3>AKNU S.Sundar Matric Hr Sec School</h3>
+            <div class="date">Jun 2018 – Mar 2019</div>
+            <p>SSLC – Percentage: 88.60</p>
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2>Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-category">
+                <h3>Languages</h3>
+                <ul class="skill-list">
+                    <li>C</li>
+                    <li>C++</li>
+                    <li>Python</li>
+                    <li>Java</li>
+                    <li>SQL</li>
+                </ul>
+            </div>
+            <div class="skill-category">
+                <h3>Developer Tools</h3>
+                <ul class="skill-list">
+                    <li>VS Code</li>
+                    <li>Android Studio</li>
+                    <li>Google Colab</li>
+                    <li>Git</li>
+                    <li>Github</li>
+                </ul>
+            </div>
+            <div class="skill-category">
+                <h3>Operating Systems</h3>
+                <ul class="skill-list">
+                    <li>Linux</li>
+                    <li>Windows</li>
+                </ul>
+            </div>
+            <div class="skill-category">
+                <h3>Software Development Concepts</h3>
+                <ul class="skill-list">
+                    <li>Object Oriented Programming</li>
+                    <li>Data Structure and Algorithm</li>
+                    <li>Agile-Scrum</li>
+                </ul>
+            </div>
+            <div class="skill-category">
+                <h3>Soft Skills</h3>
+                <ul class="skill-list">
+                    <li>Communication</li>
+                    <li>Team Collaboration</li>
+                    <li>Time Management</li>
+                    <li>Critical Thinking</li>
+                    <li>Attention to Detail</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <h2>Experience</h2>
+        <div class="internship">
+            <h3>Project Intern, K.L.N Innovation & Research Park – Sivagangai, Tamil Nadu</h3>
+            <div class="date">Mar – Dec 2023</div>
+            <p>Laser Transmitter & Receiver Signal Coordination System for Land Leveling Unit</p>
+            <ul>
+                <li>Collaborated with a team of six to engineer a MicroPython-based system on Raspberry Pi that delivers fast, precise real-time elevation profiling, significantly enhancing operational efficiency for farmers</li>
+                <li>Integrated sensor networks and optimized data processing pipelines, enhancing overall IoT and embedded system performance.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2>Projects</h2>
+        <div class="project-item">
+            <h3>SmartAgroBiz: ML-Powered Farming and E Commerce Solution</h3>
+            <div class="date">May 2025</div>
+            <ul>
+                <li>Built a cross-platform e-commerce mobile app using Flutter and Supabase to connect farmers with local buyers, enabling real-time product listing and order management.</li>
+                <li>Developed a Random Forest-based model using historical district-level data to recommend region-specific crops by predicting yield, saturation, and profitability metrics</li>
+            </ul>
+            <div class="project-github">
+                <a href="https://github.com/Arun-Karthick-N/SmartCropX" target="_blank" rel="noopener" class="btn" style="font-size: 0.9rem; background: #667eea; color: white;">View on GitHub <i class="fab fa-github"></i></a>
+            </div>
+        </div>
+        <div class="project-item">
+            <h3>IoT Enabled Air Quality Monitoring System</h3>
+            <div class="date">May 2024</div>
+            <ul>
+                <li>Developed software solutions employing Embedded C, enhancing the functionality of a real-time air quality monitoring system and achieving reliable data logging at intervals of every five seconds.</li>
+                <li>Designed a cloud-based alert system to notify users about critical levels of air quality.</li>
+            </ul>
+            <div class="project-github">
+                <a href="https://github.com/Arun-Karthick-N/IoT-Enabled-Air-Quality-Monitoring-System" target="_blank" rel="noopener" class="btn" style="font-size: 0.9rem; background: #667eea; color: white;">View on GitHub <i class="fab fa-github"></i></a>
+            </div>
+        </div>
+        <div class="project-item">
+            <h3>Smart Energy Management System Using IoT</h3>
+            <div class="date">Feb 2024</div>
+            <ul>
+                <li>Engineered a real-time energy management solution using Raspberry Pi 3, integrating advanced sensors and wireless on/off controls for seamless home automation.</li>
+                <li>Designed an intuitive dashboard with Embedded C to deliver actionable energy analytics and enable remote device management.</li>
+            </ul>
+            <div class="project-github">
+                <a href="https://github.com/Arun-Karthick-N/Smart-Energy-Management-System-Using-IoT" target="_blank" rel="noopener" class="btn" style="font-size: 0.9rem; background: #667eea; color: white;">View on GitHub <i class="fab fa-github"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <section id="certificates">
+        <h2>Certificates</h2>
+        <div class="cert-grid">
+            <div class="cert-item">
+                <h3>C for Everyone: Programming Fundamentals</h3>
+                <div class="date">University of California</div>
+            </div>
+            <div class="cert-item">
+                <h3>Python</h3>
+                <div class="date">Spoken Tutorial, IIT Bombay</div>
+            </div>
+            <div class="cert-item">
+                <h3>TCS iON Career Edge - Young Professional</h3>
+                <div class="date">TCS iON</div>
+            </div>
+            <div class="cert-item">
+                <h3>Cybersecurity Essentials</h3>
+                <div class="date">ICT Academy</div>
+            </div>
+            <div class="cert-item">
+                <h3>Introduction to Industry 4.0 and Industrial Internet of Things</h3>
+                <div class="date">NPTEL</div>
+            </div>
+            <div class="cert-item">
+                <h3>Learnathon 2022</h3>
+                <div class="date">ICT Academy</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Contact</h2>
+        <p style="text-align: center; font-size: 1.1rem;">Interested in collaborating? Let's connect!</p>
+        <div style="text-align: center; margin-top: 2rem;">
+            <a href="mailto:arunkarthickn27@gmail.com" class="btn"><i class="fas fa-envelope"></i> Email Me</a>
+            <a href="tel:+917200401122" class="btn" style="margin-left: 1rem;"><i class="fas fa-phone"></i> Call Me</a>
+            <a href="https://www.linkedin.com/in/arun-karthick-n/" class="btn" style="margin-left: 1rem;" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i> LinkedIn</a>
+            <a href="https://github.com/Arun-Karthick-N" class="btn" style="margin-left: 1rem;" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; <script>document.write(new Date().getFullYear());</script> Arun Karthick N. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Hamburger menu toggle
+        function toggleMenu() {
+            const nav = document.querySelector('.nav-links');
+            nav.classList.toggle('active');
+        }
+
+        // Fade-in animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        });
+        document.querySelectorAll('section').forEach(sec => observer.observe(sec));
+    </script>
+</body>
+</html>
+```
