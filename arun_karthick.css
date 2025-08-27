@@ -1,0 +1,248 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8f9fa;
+}
+header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 1rem 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+.nav-links a:hover {
+    color: #ffd700;
+}
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background: white;
+    margin: 3px 0;
+    transition: 0.3s;
+}
+.nav-links.mobile {
+    position: fixed;
+    left: -100%;
+    top: 60px;
+    flex-direction: column;
+    background: rgba(102, 126, 234, 0.95);
+    width: 100%;
+    text-align: center;
+    transition: 0.3s;
+    padding: 2rem 0;
+}
+.nav-links.mobile.active {
+    left: 0;
+}
+section {
+    padding: 5rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    /* Removed initial opacity: 0 and transform to ensure visibility even if JS fails */
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+/* For animation, we'll add a class on load if JS runs */
+#hero {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    text-align: center;
+    padding: 10rem 2rem 5rem;
+    margin-top: 60px; /* Account for fixed header */
+    /* Ensure hero is visible by default */
+    opacity: 1 !important;
+    transform: none !important;
+}
+#hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+#hero p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+.contact-info {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+.contact-info a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+.contact-info a:hover {
+    color: #ffd700;
+}
+.contact-info i {
+    font-size: 1.2rem;
+    margin-right: 0.5rem;
+}
+.btn {
+    display: inline-block;
+    background: #ffd700;
+    color: #333;
+    padding: 0.8rem 2rem;
+    text-decoration: none;
+    border-radius: 50px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    font-weight: 500;
+}
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: #333;
+}
+.about-bio {
+    text-align: justify;
+    max-width: 800px;
+    margin: 0 auto 3rem;
+    font-size: 1.1rem;
+    color: #666;
+}
+.about-bio ul {
+    text-align: justify;
+    margin-top: 1rem;
+}
+.about-bio ul li {
+    margin-bottom: 0.5rem;
+}
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+.skill-category {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    text-align: center;
+}
+.skill-category h3 {
+    margin-bottom: 1rem;
+    color: #667eea;
+}
+.skill-list {
+    list-style: none;
+}
+.skill-list li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #eee;
+}
+.education-item, .project-item, .cert-item {
+    background: white;
+    margin-bottom: 2rem;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+.education-item:hover, .project-item:hover, .cert-item:hover {
+    transform: translateY(-5px);
+}
+.education-item h3, .project-item h3, .cert-item h3 {
+    color: #667eea;
+    margin-bottom: 0.5rem;
+}
+.education-item .date, .project-item .date, .cert-item .date {
+    color: #666;
+    font-style: italic;
+    margin-bottom: 1rem;
+}
+.project-item ul {
+    margin-left: 1.5rem;
+}
+.project-item ul li {
+    margin-bottom: 0.5rem;
+}
+.project-github {
+    margin-top: 1rem;
+}
+.project-github a {
+    font-size: 0.9rem;
+}
+.internship {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+}
+.internship h3 {
+    color: #667eea;
+    margin-bottom: 0.5rem;
+}
+.internship .date {
+    color: #666;
+    font-style: italic;
+    margin-bottom: 1rem;
+}
+.cert-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+}
+footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 2rem;
+}
+@media (max-width: 768px) {
+    .hamburger { display: flex; }
+    .nav-links { display: none; }
+    .nav-links.mobile { display: flex; }
+    #hero h1 { font-size: 2rem; }
+    .contact-info { flex-direction: column; gap: 1rem; }
+    .btn { width: 100%; margin: 0.5rem 0; display: block; max-width: 300px; margin-left: auto; margin-right: auto; }
+}
